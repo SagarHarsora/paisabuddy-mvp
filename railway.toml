@@ -1,0 +1,23 @@
+[build]
+builder = "dockerfile"
+dockerfile = "backend/Dockerfile"
+
+[deploy]
+startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+
+[[services]]
+name = "postgres"
+image = "postgres:15-alpine"
+plan = "starter"
+maxScale = 1
+
+[[services.env]]
+POSTGRES_DB = "paisabuddy"
+POSTGRES_USER = "postgres"
+POSTGRES_PASSWORD = "${{secrets.DB_PASSWORD}}"
+
+[[services]]
+name = "redis"
+image = "redis:7-alpine"
+plan = "starter"
+maxScale = 1
