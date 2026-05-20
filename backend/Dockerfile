@@ -19,7 +19,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/app ./app
 COPY backend/migrations ./migrations
 COPY backend/pyproject.toml .
-COPY backend/.env.example .
 
 # Create non-root user
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
